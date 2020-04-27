@@ -4,7 +4,7 @@ Ruby implementation of a Finite State Machine for tutorial purposes.
 
 To run this you need ruby 2.5.x, gem and bundler. 
 
-Clone the repo, cd into it, and run bundle install to acquire dependencies.
+Clone the repo, cd into it, and run `bundle install` to acquire dependencies.
 
 # Running
 
