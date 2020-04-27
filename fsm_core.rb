@@ -169,8 +169,5 @@ class StateModel
 	end
 end
 
+#Temporary - just instantiate the StateModel class to execute it
 x=StateModel.new
-
-#x.handle_event(Event.new(:ev_initialise, "test data"))
-#x.handle_event(Event.new(:ev_initialisve, "test data"))
-#x.raise_event(:ev_initialise, 'somedata')
