@@ -89,6 +89,10 @@ class StateModel
 		end
 	end
 
+
+	private
+
+	
 	def do_something
 		inevt=nil
 		@sema.synchronize{
@@ -125,8 +129,7 @@ class StateModel
 		@state = action[:nx_state] unless action[:nx_state].eql?(:st_no_change)
 		@log.debug "Now in state [#{@state}]"
 	end
-
-	private 
+ 
 
 	def execute_action(action, data=nil)
 		start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
