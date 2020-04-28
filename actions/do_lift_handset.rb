@@ -5,7 +5,6 @@ class DoLiftHandset < FsmActionHandler
 		#Call the ancestor generic method first for logging
 		super 
 		#Now customise the behaviour
-		sleep(1)
 		@log.info("DEVICE-CONTROL::INITIATING KEYPAD AND PLAYING DIALTONE")
 	end
 end

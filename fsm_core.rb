@@ -7,14 +7,14 @@ require_relative 'fsm_const'
 require_relative 'fsm_event'
 require_relative 'fsm_event_source'
 
-class StateModel
+class FsmCore
 	include FsmConst
 	include FsmEventSource
 
 	RULESET  = {
 		# Defined as the starting state by init code
 		:st_idle => {
-			:ev_initialise => {action: :do_initialize, nx_state: :st_starting} 
+			:ev_initialise => {action: :do_initialize,            nx_state: :st_starting} 
 		},
 		#After forced startup event, this is the transitional state as the framework is booted
 		:st_starting => {
@@ -30,6 +30,7 @@ class StateModel
 			:ev_replace_handset => {action: :do_replace_handset,  nx_state: :st_ready},
 			:ev_inbound_call    => {action: :do_reject_engaged,   nx_state: :st_no_change},
 			:ev_next_call       => {action: :do_next_call,   	  nx_state: :st_off_hook},
+			:ev_keypad          => {action: :do_tone,   		  nx_state: :st_no_change}, 
 		},
 		:st_call_ringing => {
 			:ev_answer_timeout  => {action: :do_terminate_call,   nx_state: :st_ready},
@@ -92,7 +93,7 @@ class StateModel
 
 	private
 
-	
+
 	def do_something
 		inevt=nil
 		@sema.synchronize{
@@ -130,7 +131,6 @@ class StateModel
 		@log.debug "Now in state [#{@state}]"
 	end
  
-
 	def execute_action(action, data=nil)
 		start_time = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 		@functions[action].call(data)
@@ -173,4 +173,4 @@ class StateModel
 end
 
 #Temporary - just instantiate the StateModel class to execute it
-x=StateModel.new
+phone=FsmCore.new
