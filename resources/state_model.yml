@@ -1,0 +1,52 @@
+---
+:st_idle:
+  :ev_initialise:
+    :action: :do_initialize
+    :nx_state: :st_starting
+:st_starting:
+  :ev_ready:
+    :action: :do_nothing
+    :nx_state: :st_ready
+  :ev_error:
+    :action: :do_abort
+    :nx_state: :st_idle
+:st_ready:
+  :ev_lift_handset:
+    :action: :do_lift_handset
+    :nx_state: :st_off_hook
+  :ev_inbound_call:
+    :action: :do_call_ringing
+    :nx_state: :st_call_ringing
+:st_off_hook:
+  :ev_replace_handset:
+    :action: :do_replace_handset
+    :nx_state: :st_ready
+  :ev_inbound_call:
+    :action: :do_reject_engaged
+    :nx_state: :st_no_change
+  :ev_next_call:
+    :action: :do_next_call
+    :nx_state: :st_off_hook
+  :ev_keypad:
+    :action: :do_tone
+    :nx_state: :st_no_change
+:st_call_ringing:
+  :ev_answer_timeout:
+    :action: :do_terminate_call
+    :nx_state: :st_ready
+  :ev_lift_handset:
+    :action: :do_accept_call
+    :nx_state: :st_call_active
+:st_call_active:
+  :ev_replace_handset:
+    :action: :do_terminate_call
+    :nx_state: :st_ready
+  :ev_call_dropped:
+    :action: :do_terminate_call
+    :nx_state: :st_ready
+  :ev_keypad:
+    :action: :do_tone
+    :nx_state: :st_no_change
+  :ev_next_call:
+    :action: :do_next_call
+    :nx_state: :st_off_hook

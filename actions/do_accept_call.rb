@@ -1,4 +1,4 @@
-require_relative './fsm_action_handler'
+require_relative 'fsm_action_handler'
 
 class DoAcceptCall < FsmActionHandler
 	def call(args=nil)

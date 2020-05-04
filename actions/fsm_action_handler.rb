@@ -1,4 +1,4 @@
-require_relative '../fsm_event_source'
+require_relative '../helpers/fsm_event_source'
 
 #Base class for all action handlers to inherit
 class FsmActionHandler
